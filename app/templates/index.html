@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-10 col-lg-8">
+    <div class="hero-card card shadow-lg border-0 my-4">
+      <div class="card-header hero-header text-white text-center py-4">
+        <i class="bi bi-calculator-fill fs-1 mb-2"></i>
+        <h2 class="mb-2">Lập kế hoạch ăn uống theo BMI</h2>
+        <p class="mb-0 opacity-90">Nhập thông tin để nhận kế hoạch ăn uống 7 ngày + gợi ý luyện tập phù hợp</p>
+      </div>
+      <div class="card-body p-4">
+        <form action="/plan" method="post">
+        <form action="/plan" method="post">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold"><i class="bi bi-speedometer2 me-1"></i>Cân nặng</label>
+              <input class="form-control form-control-lg" name="weight" required placeholder="Nhập cân nặng" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold"><i class="bi bi-rulers me-1"></i>Chiều cao</label>
+              <input class="form-control form-control-lg" name="height" required placeholder="Nhập chiều cao" />
+            </div>
+          </div>
+          <div class="row g-3 mt-2">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold"><i class="bi bi-calendar-event me-1"></i>Tuổi</label>
+              <input class="form-control form-control-lg" name="age" required placeholder="Nhập tuổi" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold"><i class="bi bi-gender-ambiguous me-1"></i>Giới tính</label>
+              <select class="form-select form-select-lg" name="sex"><option>male</option><option>female</option></select>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <label class="form-label fw-semibold"><i class="bi bi-activity me-1"></i>Mức độ hoạt động</label>
+            <select class="form-select form-select-lg" name="activity">
+              <option value="sedentary">Ít vận động</option>
+              <option value="light">Nhẹ</option>
+              <option value="moderate" selected>Vừa phải</option>
+              <option value="active">Năng động</option>
+            </select>
+          </div>
+
+          <div class="row g-3 mt-2">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold"><i class="bi bi-bullseye me-1"></i>Mục tiêu</label>
+              <select class="form-select form-select-lg" name="goal">
+                <option value="auto" selected>Tự động (theo BMI)</option>
+                <option value="lose">Giảm cân</option>
+                <option value="gain">Tăng cân</option>
+                <option value="maintain">Duy trì</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold"><i class="bi bi-globe me-1"></i>Đơn vị</label>
+              <select class="form-select form-select-lg" name="units">
+                <option value="metric" selected>kg / cm</option>
+                <option value="imperial">lbs / in</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <label class="form-label fw-semibold"><i class="bi bi-egg-fried me-1"></i>Ưu tiên chế độ ăn</label>
+            <input class="form-control form-control-lg" name="diet" placeholder="ví dụ: chay, keto, không gluten" />
+          </div>
+
+          <div class="d-grid mt-4">
+            <button class="btn btn-primary btn-lg shadow" type="submit">
+              <i class="bi bi-lightning-charge-fill me-2"></i>Tạo kế hoạch
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
