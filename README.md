@@ -4,12 +4,12 @@
     </a>
 </h2>
 <h2 align="center">
-   NETWORK PROGRAMMING
+   NETWORK PROGRAMMING - FINAL PROJECT
 </h2>
 <div align="center">
     <p align="center">
         <img src="docs/aiotlab_logo.png" alt="AIoTLab Logo" width="170"/>
-        <img src="docs/fitdnu_logo.png" alt="AIoTLab Logo" width="180"/>
+        <img src="docs/fitdnu_logo.png" alt="FIT DNU Logo" width="180"/>
         <img src="docs/dnu_logo.png" alt="DaiNam University Logo" width="200"/>
     </p>
 
@@ -19,167 +19,325 @@
 
 </div>
 
+---
 
-# Meal Planner by BMI (Flask + Google Gemini API)
+# 🍽️ AI-Powered Meal Planner by BMI
 
-Ứng dụng Flask tính BMI, ước lượng nhu cầu calo, và tạo kế hoạch ăn uống + luyện tập 7 ngày bằng Google Gemini AI.
+> **Ứng dụng Flask tích hợp Google Gemini API để tạo kế hoạch dinh dưỡng cá nhân hóa dựa trên chỉ số BMI**
 
-## Tính năng
-- ✅ Tính BMI & TDEE (Total Daily Energy Expenditure)
-- ✅ Kế hoạch ăn uống 7 ngày theo ẩm thực Việt Nam
-- ✅ Gợi ý luyện tập phù hợp (đi bộ, yoga, cardio theo BMI)
-- ✅ Phân tích và cảnh báo BMI (quá thấp/quá cao)
-- ✅ Tích hợp Google Gemini API để sinh kế hoạch thông minh
-- ✅ Giao diện web hiện đại, responsive với bảng đẹp
-- ✅ **Hiển thị dạng bảng chuyên nghiệp** với hiệu ứng hover & click
-- ✅ **Sao chép bảng** vào clipboard
-- ✅ **Xuất CSV** để mở bằng Excel
-- ✅ **Thu gọn/Mở rộng** bảng linh hoạt
-- ✅ **In ấn & Tải PDF** trực tiếp
-- ✅ Mock fallback khi không có API key
+## 📋 Mục lục
 
-## Các chức năng tương tác với bảng
+- [Giới thiệu](#-giới-thiệu-hệ-thống)
+- [Tính năng chính](#-tính-năng-chính)
+- [Công nghệ sử dụng](#-công-nghệ-sử-dụng)
+- [Kiến trúc hệ thống](#-kiến-trúc-hệ-thống)
+- [Cài đặt và chạy](#-hướng-dẫn-cài-đặt--chạy)
+- [Hướng dẫn sử dụng](#-hướng-dẫn-sử-dụng)
+- [API Documentation](#-api-documentation)
+- [Screenshots](#-screenshots)
+- [Thông tin liên hệ](#-thông-tin-liên-hệ)
 
-### 1. **Highlight Row (Click để chọn)**
-- Click vào bất kỳ hàng nào trong bảng để làm nổi bật
-- Giúp dễ dàng theo dõi kế hoạch theo từng ngày
 
-### 2. **Copy to Clipboard (Sao chép)**
-- Nút "Sao chép" trong toolbar hoặc phía dưới
-- Sao chép toàn bộ bảng để paste vào Word, Email, etc.
+---
 
-### 3. **Export to CSV (Xuất Excel)**
-- Tải xuống file CSV với encoding UTF-8
-- Mở bằng Excel để chỉnh sửa hoặc lưu trữ
+## 🎯 Giới thiệu hệ thống
 
-### 4. **Toggle View (Thu gọn/Mở rộng)**
-- Thu gọn bảng để xem tổng quan nhanh
-- Mở rộng để xem chi tiết đầy đủ
+**AI Dinh Dưỡng Thông Minh** là ứng dụng web giúp người dùng xây dựng kế hoạch ăn uống khoa học và cá nhân hóa thông qua việc kết hợp:
 
-### 5. **Print & PDF**
-- In trực tiếp hoặc lưu thành PDF
-- Layout được tối ưu cho in ấn
+- **Tính toán BMI (Body Mass Index)** theo tiêu chuẩn WHO
+- **Ước lượng nhu cầu calo hàng ngày** dựa trên công thức Mifflin-St Jeor
+- **Trí tuệ nhân tạo Gemini 2.5 Pro** để tạo thực đơn chi tiết 7 ngày
 
-## Cài đặt nhanh
+### 🔄 Quy trình hoạt động
 
-### 1. Clone và tạo virtualenv
-```powershell
-cd "C:\Users\GIAP OS\BMI"
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+```mermaid
+graph LR
+    A[Người dùng nhập thông tin] --> B[Tính BMI & TDEE]
+    B --> C[Gửi request đến Gemini API]
+    C --> D[AI sinh kế hoạch dinh dưỡng]
+    D --> E[Hiển thị kết quả + Biểu đồ]
 ```
 
-### 2. Cài dependencies
-```powershell
+1. **Input**: Người dùng nhập chiều cao, cân nặng, giới tính, độ tuổi, mức độ vận động, mục tiêu thể hình
+2. **Processing**: Hệ thống tính toán BMI, phân loại thể trạng và ước lượng TDEE (Total Daily Energy Expenditure)
+3. **AI Generation**: Dữ liệu được gửi đến Gemini API để sinh kế hoạch ăn uống thông minh
+4. **Output**: Hiển thị thực đơn 7 ngày với đầy đủ thông tin dinh dưỡng và biểu đồ trực quan
+
+---
+
+## ⚡ Tính năng chính
+
+### 🧮 Tính toán sức khỏe
+- ✅ Tính chỉ số BMI và phân loại theo chuẩn WHO
+- ✅ Ước lượng TDEE dựa trên công thức Mifflin-St Jeor
+- ✅ Điều chỉnh calo theo mục tiêu (giảm/tăng/giữ cân)
+
+### 🤖 AI-Powered Features
+- ✅ Sinh kế hoạch ăn uống 7 ngày tự động
+- ✅ Cân đối tỷ lệ Protein/Carbs/Fats phù hợp
+- ✅ Đề xuất bài tập thể dục kèm theo
+- ✅ Lời khuyên dinh dưỡng cá nhân hóa
+
+### 📊 Trực quan hóa dữ liệu
+- ✅ Giao diện responsive, thân thiện người dùng
+
+### 💾 Quản lý dữ liệu
+- ✅ Lưu trữ kế hoạch dưới dạng JSON
+- ✅ Xuất file PDF (tính năng mở rộng)
+- ✅ Lịch sử tra cứu (tính năng tương lai)
+
+---
+
+## 🛠️ Công nghệ sử dụng
+
+### Backend
+![Python](https://img.shields.io/badge/Python_3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask_3.0-000000?style=for-the-badge&logo=flask&logoColor=white)
+![Gemini API](https://img.shields.io/badge/Gemini_2.5_Pro-4285F4?style=for-the-badge&logo=google&logoColor=white)
+
+### Frontend
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
+
+### Tools & Libraries
+| Library | Version | Mục đích |
+|---------|---------|----------|
+| Flask | 3.0+ | Web framework |
+| Requests | 2.31+ | HTTP client |
+| Python-dotenv | 1.0+ | Environment variables |
+| Pandas | 2.0+ | Data processing |
+| Google Generative AI | 0.3+ | Gemini API integration |
+
+---
+
+## 🏗️ Kiến trúc hệ thống
+
+```
+┌─────────────────┐
+│  Web Browser    │
+│  (Frontend)     │
+└────────┬────────┘
+         │ HTTP Request
+         ▼
+┌─────────────────┐
+│  Flask Server   │
+│  (app.py)       │
+├─────────────────┤
+│  - BMI Calc     │
+│  - TDEE Calc    │
+│  - API Handler  │
+└────────┬────────┘
+         │ API Call
+         ▼
+┌─────────────────┐
+│  Gemini API     │
+│  (Google Cloud) │
+└─────────────────┘
+```
+
+### Luồng dữ liệu chi tiết
+
+1. **Client Request**: Browser gửi POST request với form data
+2. **Flask Processing**: 
+   - Validate input
+   - Tính BMI = weight / (height²)
+   - Tính TDEE = BMR × Activity Factor
+3. **API Integration**:
+   - Format prompt cho Gemini
+   - Gửi request với API key
+   - Parse JSON response
+4. **Response Rendering**:
+   - Render template với dữ liệu
+   - Inject JavaScript charts
+   - Return HTML page
+
+---
+
+## 🚀 Hướng dẫn cài đặt & chạy
+
+### Yêu cầu hệ thống
+- Python 3.9 trở lên
+- pip (Python package manager)
+- Git
+- Google Gemini API Key ([Đăng ký tại đây](https://ai.google.dev/))
+
+### Bước 1: Clone repository
+
+```bash
+git clone https://github.com/<your-username>/bmi-diet-planner-gemini.git
+cd bmi-diet-planner-gemini
+```
+
+### Bước 2: Tạo môi trường ảo (khuyến nghị)
+
+**Windows:**
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+**Linux/MacOS:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### Bước 3: Cài đặt dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 3. Cấu hình Gemini API Key
+### Bước 4: Cấu hình API Key
 
-#### Lấy API Key miễn phí
-1. Truy cập: https://makersuite.google.com/app/apikey
-2. Đăng nhập Google
-3. Nhấn **"Create API Key"**
-4. Copy key
+Tạo file `.env` trong thư mục gốc:
 
-#### Tạo file .env
-```powershell
-copy .env.example .env
-```
-
-Mở `.env` và paste API key:
 ```env
-GEMINI_API_KEY=AIzaSy...your-actual-key-here
+GEMINI_API_KEY=AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+FLASK_ENV=development
+FLASK_DEBUG=True
 ```
 
-### 4. Chạy app
-```powershell
-$env:FLASK_APP='app.app'
-$env:FLASK_ENV='development'
+> ⚠️ **Lưu ý**: Không commit file `.env` lên Git. Đã có trong `.gitignore`
+
+### Bước 5: Chạy ứng dụng
+
+```bash
+python app.py
+```
+
+Hoặc với Flask CLI:
+
+```bash
 flask run
 ```
 
-Mở trình duyệt: http://127.0.0.1:5000
+Mở trình duyệt tại: **http://localhost:5000**
 
-## Cách hoạt động
+### Bước 6: Build production (Optional)
 
-1. Người dùng nhập: cân nặng, chiều cao, tuổi, giới tính, mức hoạt động, mục tiêu
-2. Server tính BMI và TDEE, xác định target calories
-3. Tạo prompt chi tiết gửi tới **Google Gemini API**:
-   - Yêu cầu kế hoạch ăn 7 ngày (khẩu phần Việt Nam)
-   - Gợi ý luyện tập phù hợp
-   - Phân tích BMI + cảnh báo sức khỏe
-4. Gemini trả về plan → server parse thành HTML table an toàn
-5. Hiển thị plan + shopping list + exercise + BMI analysis
+```bash
+# Set production environment
+export FLASK_ENV=production
 
-## Mock Mode (không cần API key)
-- Nếu không đặt `GEMINI_API_KEY`, app sẽ dùng mock thông minh:
-  - Tạo plan 7 ngày dựa trên BMI/target calories
-  - Điều chỉnh khẩu phần theo BMI (thấp → tăng, cao → giảm)
-  - Gợi ý luyện tập theo mục tiêu
-  - Cảnh báo BMI bất thường
-
-## Cấu trúc project
-```
-BMI/
-├── app/
-│   ├── __init__.py
-│   ├── app.py              # Flask routes
-│   ├── utils.py            # BMI/TDEE calculation, prompt builder
-│   ├── gemini_client.py    # Google Gemini API client
-│   ├── templates/
-│   │   ├── base.html
-│   │   ├── index.html      # Form nhập liệu
-│   │   └── plan.html       # Hiển thị kế hoạch
-│   └── static/
-│       └── style.css       # Custom styles
-├── tests/
-│   └── test_utils.py       # Unit tests
-├── requirements.txt
-├── .env.example
-└── README.md
+# Run with Gunicorn
+gunicorn -w 4 -b 0.0.0.0:5000 app:app
 ```
 
-## API Details
+---
 
-### Google Gemini API
-- Model: `gemini-pro`
-- SDK: `google-generativeai`
-- Rate limit: 60 requests/minute (free tier)
-- Docs: https://ai.google.dev/docs
+## 📖 Hướng dẫn sử dụng
 
-### Prompt structure
+### 1. Truy cập ứng dụng
+
+Mở trình duyệt và truy cập `http://localhost:5000`
+
+### 2. Nhập thông tin cá nhân
+
+| Trường | Mô tả | Ví dụ |
+|--------|-------|-------|
+| Chiều cao | Đơn vị: cm | 170 |
+| Cân nặng | Đơn vị: kg | 65 |
+| Giới tính | Nam/Nữ | Nam |
+| Tuổi | Đơn vị: năm | 25 |
+| Hoạt động | Mức độ 1-5 | 3 (Trung bình) |
+| Mục tiêu | Giảm/Giữ/Tăng cân | Giảm cân |
+
+### 3. Nhận kết quả
+
+Hệ thống sẽ hiển thị:
+- ✅ Chỉ số BMI và đánh giá thể trạng
+- ✅ Nhu cầu calo hàng ngày
+- ✅ Kế hoạch ăn uống 7 ngày chi tiết
+- ✅ Biểu đồ trực quan
+- ✅ Lời khuyên tập luyện
+
+### 4. Lưu kế hoạch
+
+Click nút **"Tải xuống PDF"** hoặc **"Lưu kế hoạch"** để export dữ liệu.
+
+---
+
+## 🔌 API Documentation
+
+### Endpoint: `/calculate`
+
+**Method:** `POST`
+
+**Request Body:**
+```json
+{
+  "height": 170,
+  "weight": 65,
+  "gender": "male",
+  "age": 25,
+  "activity": 3,
+  "goal": "lose"
+}
 ```
-Hãy tạo kế hoạch ăn 7 ngày theo phong cách ẩm thực Việt Nam...
-BMI: X.X, TDEE: YYYY kcal, mục tiêu: [giảm/tăng/duy trì]...
-Đề xuất kế hoạch luyện tập nhẹ...
-Phân tích chỉ số BMI và cảnh báo nếu cần...
+
+**Response:**
+```json
+{
+  "bmi": 22.5,
+  "classification": "Bình thường",
+  "tdee": 2200,
+  "meal_plan": {
+    "day_1": {...},
+    "day_2": {...}
+  }
+}
 ```
 
-## Tests
-```powershell
-pytest -q
-```
+### BMI Classification
 
-## Troubleshooting
+| BMI Range | Phân loại | WHO Standard |
+|-----------|-----------|--------------|
+| < 18.5 | Thiếu cân | Underweight |
+| 18.5 - 24.9 | Bình thường | Normal weight |
+| 25.0 - 29.9 | Thừa cân | Overweight |
+| ≥ 30.0 | Béo phì | Obese |
 
-### Lỗi: "API key not valid"
-- Kiểm tra key đã copy đúng vào `.env`
-- Đảm bảo không có khoảng trắng thừa
-- Key phải bắt đầu bằng `AIza...`
+---
 
-### App trả về mock thay vì gọi API
-- Kiểm tra `GEMINI_API_KEY` đã set trong `.env`
-- Restart Flask sau khi thay đổi `.env`
-- Xem terminal log: sẽ có message `[GeminiClient] Configured with...`
+## 📸 Screenshots
 
-### Response quá ngắn/không đủ 7 ngày
-- Gemini đôi khi truncate. Tăng token limit trong `gemini_client.py` (sửa `max_output_tokens`)
+### 1. Trang chủ - Form nhập liệu
+![Homepage](docs/Screenshot%202025-11-11%20155247.png)
 
-## License
-MIT
+### 2. Kết quả BMI
+![BMI Result](docs/Screenshot%202025-11-11%20155319.png)
 
-## Credits
-- Flask web framework
-- Google Gemini API
-- Bootstrap 5 + Bootstrap Icons
+### 3. Kế hoạch dinh dưỡng 7 ngày
+![Meal Plan](docs/Screenshot%202025-11-11%20155334.png)
+
+
+---
+
+
+## 👨‍💻 Thông tin liên hệ
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/yourusername" width="100px;" alt=""/>
+      <br />
+      <b>Nguyễn Tuấn Anh</b>
+      <br />
+      <sub>Developer</sub>
+    </td>
+  </tr>
+</table>
+
+### Thông tin sinh viên
+
+| Thông tin | Chi tiết |
+|-----------|----------|
+| 👤 **Họ và tên** | Nguyễn Tuấn Anh |
+| 🎓 **Lớp** | CNTT 16-04 |
+| 🏫 **Trường** | Đại học Đại Nam |
+| 🏢 **Khoa** | Công Nghệ Thông Tin |
+
+
